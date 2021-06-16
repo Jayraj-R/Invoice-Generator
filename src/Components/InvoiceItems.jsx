@@ -2,8 +2,11 @@ import { Typography, Button, Grid,Divider } from '@material-ui/core'
 import React , {useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import CreateIcon from '@material-ui/icons/Create';
-import AddInvoice from './AddInvoice';
+import AddInvoiceItem from './AddInvoiceItem';
 import TableComp from './TableComp';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles({
     root:{
@@ -14,14 +17,31 @@ const useStyles = makeStyles({
         textAlign:"left"
     },
     list:{
-    }
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      background:"white",
+      boxShadow: 10,
+      padding: "2em",
+      width:"60%"
+    },
 })
 
 const InvoiceItems = () => {
     const classes = useStyles()
+    const [open, setOpen] = useState(false);
 
-    const [isAdding, setIsAdding] = useState(false);
+    const handleOpen = () => {
+      setOpen(true);
+    };
 
+    const handleClose = () => {
+      setOpen(false);
+    };
     const headers = ["Invoice Item","Rate (Rs/hr)", "Working hours", "Total Cost"]
 
     return (
@@ -37,33 +57,36 @@ const InvoiceItems = () => {
                     color="primary"
                     className={classes.button}
                     startIcon={<CreateIcon />}
-                    onClick={()=>setIsAdding(true)}
+                    onClick={handleOpen}
                     gutterBottom
                 >
                     Add new invoice item
                 </Button>
             </Grid>
 
-            <Grid container>
-                
-                {
-                    isAdding && (
-                        <section>
-                            <AddInvoice/>
-                            <Button variant="contained" color="primary" className={classes.button} onClick={() => setIsAdding(false)}>
-                                Done
-                            </Button>
-                        </section>
-                    )
-                }
-
-            </Grid>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              className={classes.modal}
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={open}>
+                <div className={classes.paper}>
+                  <AddInvoiceItem/>
+                </div>
+              </Fade>
+            </Modal>
 
 
             <div xs={12} className={classes.list}>
                 <Typography paragraph>
-
-                    <TableComp label="invoiceItems" invoices={window.$invoiceItems} headers={headers}/>
+                    <TableComp label="invoiceItems" items={window.$invoiceItems} headers={headers}/>
                 </Typography>
             </div>
 

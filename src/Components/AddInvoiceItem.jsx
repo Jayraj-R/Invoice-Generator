@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     },
 })
 
-const AddCustomer = () => {
+const AddInvoiceItems = () => {
     const classes = useStyles()
 
     let object = {
@@ -33,8 +33,6 @@ const AddCustomer = () => {
     const [invoice, setInvoice] =  useState(object)
 
     const handleChange = (e,label) => {
-        
-
         if(label==="item")  object.item = e.target.value
         if(label==="rate")  object.rate = e.target.value
         if(label==="timeSpent")  object.timeSpent = e.target.value
@@ -83,4 +81,4 @@ const AddCustomer = () => {
     )
 }
 
-export default AddCustomer
+export default AddInvoiceItems

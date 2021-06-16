@@ -36,8 +36,28 @@ window.$customers = [
             item: "Work Expenses",
             rate: 150,
             timeSpent: 2,
-        }]
+        },
+        {
+            item: "Labour",
+            rate: 350,
+            timeSpent: 6,
+        }
+    ]
     window.$invoiceItems[0].total=(window.$invoiceItems[0].rate*window.$invoiceItems[0].timeSpent)
+    window.$invoiceItems[1].total=(window.$invoiceItems[1].rate*window.$invoiceItems[1].timeSpent)
+
+    window.$invoices = [
+        {   
+            ref : "101",
+            dateC : "",
+            dateD : "",
+            paid : "yes",
+            link : "",
+            comp: window.$customers[0].compName,
+            invoiceItems : [window.$invoiceItems[0].item, window.$invoiceItems[1].item],
+            cost : (window.$invoiceItems[0].total + window.$invoiceItems[1].total ),
+        }
+    ]
 
 
 const Layout = () => {

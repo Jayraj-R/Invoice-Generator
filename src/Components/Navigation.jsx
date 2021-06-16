@@ -108,20 +108,20 @@ export default function Navigation(props) {
           id:1,
           title:"Manage Customer",
           icon: <FaceIcon/>,
-          link:"/"
+          link:"/Invoice-Generator/"
       },
       {
         id:2,
-        title:"Manage Invoices",
-        icon:<ReceiptIcon/>,
-        link:"/invoice"
-    },
-    {
-        id:1,
         title:"Add Invoices Items",
         icon:<PostAddIcon/>,
-        link:"/invoiceItems"
-    }
+        link:"/Invoice-Generator/invoiceItems"
+      }, 
+      {
+        id:3,
+        title:"Manage Invoices",
+        icon:<ReceiptIcon/>,
+        link:"/Invoice-Generator/invoice"
+    },
   ]
   const history = useHistory()
   
@@ -189,15 +189,15 @@ export default function Navigation(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
               <Switch>
-                <Route exact path="/" component={Customers} />
+                <Route exact path="/Invoice-Generator/" component={Customers} />
 
-                <Route exact path="/invoice">
+                <Route exact path="/Invoice-Generator/invoice">
                   <Typography paragraph>
                     <ManageInvoices/>
                   </Typography>
                 </Route>
 
-                <Route exact path="/invoiceItems">
+                <Route exact path="/Invoice-Generator/invoiceItems">
                   <Typography paragraph>
                     <InvoiceItems/>
                   </Typography>

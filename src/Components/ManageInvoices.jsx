@@ -1,43 +1,101 @@
-import React from 'react'
+import { Typography, Button, Grid,Divider } from '@material-ui/core'
+import React , {useState} from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import CreateIcon from '@material-ui/icons/Create';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import AddInvoices from './AddInvoices';
+import TableComp from './TableComp';
+
+const useStyles = makeStyles({
+    root:{
+        margin:0,
+        padding:0
+    },
+    header:{
+        textAlign:"left"
+    },
+    list:{
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      background:"white",
+      boxShadow: 10,
+      padding: "2em",
+      width:"60%"
+    },
+})
 
 const ManageInvoices = () => {
-    return (
-        <div>
-            Manage Invoice
-            {
-            window.$customers.map(customer => {
-              return(
-                <div key={customer.compName}>
-                  <div align="right" component="th" scope="row">
-                    {customer.compName}
-                  </div>
-                  <div align="right">{customer.contFname} {customer.contLname}</div>
-                  <div align="right">{customer.emailAdd}</div>
-                  <div align="right">{customer.contNum}</div>
-                  <div align="right">{customer.addr},{customer.town}-{customer.post}</div>
-                </div>
-              )
-            })
-          }
+    const classes = useStyles()
+    const [open, setOpen] = useState(false);
 
-        {
-            window.$invoiceItems.map(invoice => {
-              return(
-                <div key={invoice.item}>
-                  <div align="right" component="th" scope="row">
-                    {invoice.item}
-                  </div>
-                  <div align="right">{invoice.rate} {invoice.contLname}</div>
-                  <div align="right">{invoice.timeSpent}</div>
-                  <div align="right">{invoice.total}</div>
+    const handleOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const headers = ["Reference Number", "Company Name", "Date Created", "Due Date", "Expenses", "Paid", "Total Cost", "Action"]
+    return (
+        <Grid xs={12} className={classes.root}>
+
+            <Typography variant="h2" className={classes.header} gutterBottom>
+                Invoice Management
+            </Typography>
+            <Divider style={{marginBottom:40}} gutterBottom/>
+            
+            <Grid container justify="left">
+                <Button variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<CreateIcon />}
+                    onClick={handleOpen}
+                    gutterBottom
+                >
+                    Add new invoice
+                </Button>
+            </Grid>
+
+
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              className={classes.modal}
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={open}>
+                <div className={classes.paper}>
+                  <AddInvoices/>
                 </div>
-              )
-            })
-          }
-        </div>
+              </Fade>
+            </Modal>
+
+            <div xs={12} className={classes.list}>
+                <Typography paragraph>
+
+                    <TableComp label="Invoices" invoices={window.$invoices} headers={headers}/>
+                </Typography>
+            </div>
+
+
+            
+            
+        </Grid>
     )
 }
 
 export default ManageInvoices
-
-
