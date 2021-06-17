@@ -5,10 +5,10 @@ import Navigation from './Navigation'
 const theme = createMuiTheme({
     palette:{
         primary:{
-            main:'#539cff'
+            main:'#3d8f79'
         },
         secondary:{
-            main:"#EEA47F"
+            main:"#fff"
         },
         error:{
             main:"#414756"
@@ -49,13 +49,15 @@ window.$customers = [
     window.$invoices = [
         {   
             ref : "101",
-            dateC : "",
-            dateD : "",
-            paid : "yes",
+            dateC : "Sat Jun 19 2021 10:51:00 GMT+0530 (India Standard Time)",
+            dateD : "Sat Jun 29 2021 10:51:00 GMT+0530 (India Standard Time)",
+            paid : "Yes",
             link : "",
             comp: window.$customers[0].compName,
             invoiceItems : [window.$invoiceItems[0].item, window.$invoiceItems[1].item],
             cost : (window.$invoiceItems[0].total + window.$invoiceItems[1].total ),
+            qty: [window.$invoiceItems[0].timeSpent, window.$invoiceItems[1].timeSpent ],
+            price : [window.$invoiceItems[0].rate, window.$invoiceItems[1].rate]
         }
     ]
 

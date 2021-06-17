@@ -45,7 +45,7 @@ const AddInvoices = () => {
         ref : "",
         dateC : "",
         dateD : "",
-        paid : "",
+        paid : "No",
         link : "",
         comp: "",
         invoiceItems : [],
@@ -61,12 +61,12 @@ const AddInvoices = () => {
         if(label==="item")  {
             object.invoiceItems.push(e.target.value)
         }
-        if(label==="cDate")  {object.dateC = `${e}`}
+        if(label==="cDate")  {object.dateC = `${e}`;}
         if(label==="dDate")  object.dateD = `${e}`
 
         if(label==="paid")  {
-            if(e.target.checked) object.paid="Yes"
-            else object.paid="No"
+            if(e.target.checked==true) object.paid="Yes"
+            if(e.target.checked==false) object.paid="No"
         }
     }    
 
@@ -82,6 +82,32 @@ const AddInvoices = () => {
         }
         return(cost)
     }
+    const qtyCalc = (a,b) => {
+        const qty = [];
+        for(let i=0;i<a.length;i++){
+            b.map(item => {
+                if(item.item===a[i]){
+                    qty.push(parseInt(item.timeSpent))
+                }
+            })
+        }
+
+        return (qty)
+
+    }
+    const priceCalc = (a,b) => {
+        const price = [];
+        for(let i=0;i<a.length;i++){
+            b.map(item => {
+                if(item.item===a[i]){
+                    price.push(parseInt(item.rate))
+                }
+            })
+        }
+
+        return (price)
+
+    }
 
     const [isDone,setIsDone] = useState(false)
 
@@ -96,6 +122,8 @@ const AddInvoices = () => {
             object.ref = 100+parseInt(window.$invoices.length)+1
 
             object.cost = costCalc(object.invoiceItems,window.$invoiceItems)
+            object.qty = qtyCalc(object.invoiceItems,window.$invoiceItems)
+            object.price = priceCalc(object.invoiceItems,window.$invoiceItems)
             
             // object.total = parseInt(object.rate)*parseInt(object.timeSpent)
             setInvoice(object)
@@ -165,6 +193,7 @@ const AddInvoices = () => {
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
+                                value=""
                                 onChange={e => {handleChange(e,"cDate")}}
                                 />
                         </MuiPickersUtilsProvider>
@@ -180,6 +209,7 @@ const AddInvoices = () => {
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date',
                                 }}
+                                value=""
                                 onChange={e => {handleChange(e,"dDate")}}
                                 />
                         </MuiPickersUtilsProvider>
@@ -187,18 +217,12 @@ const AddInvoices = () => {
 
                     <Grid xs={12} container justify="space-between" >
                     <FormControlLabel
-                        control={<Checkbox  onChange={e => {handleChange(e,"paid")}} name="Paid" />}
+                        control={<Checkbox color="primary"  onChange={e => {handleChange(e,"paid")}} name="Paid" />}
                         label="Paid"
                     />
                     </Grid>
                 </Grid>
             </form>
-
-            <Grid>
-                <blockquote>
-                    {comp}, {items}, {cost}
-                </blockquote>
-            </Grid>
 
         </div>
     )

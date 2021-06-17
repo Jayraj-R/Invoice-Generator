@@ -61,7 +61,7 @@ const Customers = () => {
                     onClick={handleOpen}
                     gutterBottom
                 >
-                    Add new customer
+                    Add customer
                 </Button>
             </Grid>
 

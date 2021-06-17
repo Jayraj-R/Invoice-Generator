@@ -78,6 +78,7 @@ const AddCustomer = () => {
                     </Button>
                     <Grid xs={12} container justify="space-between">
                         <TextField id="standard-basic" type="text" label="Company Name" onChange={e => {handleChange(e,"compName")}}/>
+                        <TextField id="standard-basic" label="Contact Number" style={{visibility:"hidden"}} />
                         <TextField id="standard-basic" type="text" label="Contact Person First Name"  onChange={e => {handleChange(e,"contFname")}}/>
                         <TextField id="standard-basic" type="text" label="Contact Person Last Name"  onChange={e => {handleChange(e,"contLname")}}/>
                     </Grid>

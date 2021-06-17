@@ -60,7 +60,7 @@ const ManageInvoices = () => {
                     onClick={handleOpen}
                     gutterBottom
                 >
-                    Add new invoice
+                    Add invoice
                 </Button>
             </Grid>
 

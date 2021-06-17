@@ -22,11 +22,15 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 
 import {Switch, Route, Link, useHistory} from 'react-router-dom'
 import Customers from './Customers'
 import ManageInvoices from './ManageInvoices'
 import InvoiceItems from './InvoiceItems';
+import DueInvoices from './DueInvoices';
+import LateInvoices from './LateInvoices';
 
 
 
@@ -57,11 +61,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
   },
   drawer: {
+    background:"#7a7294",
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    overflow:"hidden"
   },
   drawerOpen: {
+    overflow:"hidden",
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -69,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   drawerClose: {
+    overflow:"hidden",
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -80,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
+    background:"#f5ecff",
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -88,6 +97,8 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   content: {
+    height:"100vh",
+    background:"#f5ecff",
     flexGrow: 1,
     padding: theme.spacing(3),
   },
@@ -107,21 +118,33 @@ export default function Navigation(props) {
       {
           id:1,
           title:"Manage Customer",
-          icon: <FaceIcon/>,
+          icon: <FaceIcon style={{ fontSize:"2.5em"}}/>,
           link:"/Invoice-Generator/"
       },
       {
         id:2,
         title:"Add Invoices Items",
-        icon:<PostAddIcon/>,
+        icon:<PostAddIcon style={{ fontSize:"2.5em"}}/>,
         link:"/Invoice-Generator/invoiceItems"
       }, 
       {
         id:3,
         title:"Manage Invoices",
-        icon:<ReceiptIcon/>,
+        icon:<ReceiptIcon style={{fontSize:"2.5em"}}/>,
         link:"/Invoice-Generator/invoice"
     },
+    {
+      id:4,
+      title:"Due Invoices",
+      icon:<QueryBuilderIcon style={{fontSize:"2.5em"}}/>,
+      link:"/Invoice-Generator/dueInvoices"
+  },
+  {
+    id:5,
+    title:"Late Invoices",
+    icon:<ReportProblemOutlinedIcon style={{fontSize:"2.5em"}}/>,
+    link:"/Invoice-Generator/lateInvoices"
+},
   ]
   const history = useHistory()
   
@@ -142,7 +165,7 @@ export default function Navigation(props) {
           </IconButton>
 
           <Typography variant="h6" noWrap>
-            Wrytin
+            Invoice Generator
           </Typography>
 
         </Toolbar>
@@ -172,15 +195,16 @@ export default function Navigation(props) {
         <Divider />
 
         {/* ---------------------------- LINKS ------------------------------------- */}
-        <List>
+        <List style={{background:"#7a7294"}}>
           {lists.map((list) => (
-            <Link onClick={() => {history.push(`${list.link}`)}}>
+            <Link onClick={() => {history.push(`${list.link}`)}} style={{color:"white",textDecoration:"none"}}>
               <ListItem button key={list.title}>
-                <ListItemIcon>{list.icon}</ListItemIcon>
+                <ListItemIcon style={{color:"white",}}>{list.icon}</ListItemIcon>
                 <ListItemText primary={list.title} />
               </ListItem>
             </Link>
           ))}
+          <div style={{height:"100vh"}}></div>
         </List>
 
       </Drawer>
@@ -200,6 +224,18 @@ export default function Navigation(props) {
                 <Route exact path="/Invoice-Generator/invoiceItems">
                   <Typography paragraph>
                     <InvoiceItems/>
+                  </Typography>
+                </Route>
+
+                <Route exact path="/Invoice-Generator/dueInvoices">
+                  <Typography paragraph>
+                    <DueInvoices/>
+                  </Typography>
+                </Route>
+
+                <Route exact path="/Invoice-Generator/lateInvoices">
+                  <Typography paragraph>
+                    <LateInvoices/>
                   </Typography>
                 </Route>
 

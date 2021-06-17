@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody,TableCell,TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import DisplayInvoice from './DisplayInvoice';
 
 const useStyles = makeStyles({
   table: {
@@ -11,11 +12,11 @@ const useStyles = makeStyles({
     transform:"translateX(-50%)",
   },
   headers:{
-    background:"orange",
+    background:"#7a7294"
   },
   cell:{
-    background:"pink",
-    fontSize:"1.1em"
+    fontSize:"1.1em",
+    color:"white"
   }
 });
 
@@ -74,13 +75,16 @@ export default function TableComp(props) {
                 {
                   invoice.invoiceItems.map(item => {
                     return (
-                        <>{item}, </>
+                        <>{item} </>
                       )
                   })
                 }
               </TableCell>
               <TableCell align="right">{invoice.paid}</TableCell>
               <TableCell align="right">{invoice.cost}</TableCell>
+              <TableCell align="right">
+                <DisplayInvoice invoice={invoice}/>  
+              </TableCell>
             </TableRow>
           )
         })
