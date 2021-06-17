@@ -1,11 +1,6 @@
-import { Typography, Button, Grid,Divider } from '@material-ui/core'
-import React , {useState} from 'react'
+import { Typography, Grid,Divider } from '@material-ui/core'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import CreateIcon from '@material-ui/icons/Create';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import AddInvoices from './AddInvoices';
 import TableComp from './TableComp';
 
 const useStyles = makeStyles({

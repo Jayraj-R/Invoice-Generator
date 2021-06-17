@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
   
 const AddInvoices = () => {
     const classes = useStyles();
-    const [comp, setComp] = useState("")
-    const [items, setItems] = useState([])
-    const [cost, setCost] = useState(0)
 
     let object = {
         ref : "",
@@ -65,8 +62,8 @@ const AddInvoices = () => {
         if(label==="dDate")  object.dateD = `${e}`
 
         if(label==="paid")  {
-            if(e.target.checked==true) object.paid="Yes"
-            if(e.target.checked==false) object.paid="No"
+            if(e.target.checked===true) object.paid="Yes"
+            if(e.target.checked===false) object.paid="No"
         }
     }    
 

@@ -160,7 +160,7 @@ const DisplayInvoice = (props) => {
 
 
                     <Grid className={classes.imgSection} container justify="space-between" alignItems="center" gutterBottom>
-                        <img className={classes.img} src={logo}/>
+                        <img className={classes.img} alt="LOGO" src={logo}/>
                         <div className={classes.heading}>
                             <Typography variant="h2" style={{fontSize:"5em"}}>Invoice</Typography>
                             <Typography variant="h4">- {invoice.comp}</Typography>
