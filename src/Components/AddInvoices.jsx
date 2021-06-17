@@ -58,8 +58,8 @@ const AddInvoices = () => {
         if(label==="item")  {
             object.invoiceItems.push(e.target.value)
         }
-        if(label==="cDate")  {object.dateC = `${e}`;}
-        if(label==="dDate")  object.dateD = `${e}`
+        if(label==="cDate")  {const str = `${e}`; object.dateC = str.substr(0,15)}
+        if(label==="dDate")  {const str = `${e}`; object.dateD = str.substr(0,15)}
 
         if(label==="paid")  {
             if(e.target.checked===true) object.paid="Yes"

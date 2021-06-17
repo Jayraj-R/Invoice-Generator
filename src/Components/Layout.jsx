@@ -49,8 +49,8 @@ window.$customers = [
     window.$invoices = [
         {   
             ref : "101",
-            dateC : "Sat Jun 19 2021 10:51:00 GMT+0530 (India Standard Time)",
-            dateD : "Sat Jun 29 2021 10:51:00 GMT+0530 (India Standard Time)",
+            dateC : "Sat Jun 19 2021",
+            dateD : "Sat Jun 29 2021",
             paid : "Yes",
             link : "",
             comp: window.$customers[0].compName,
